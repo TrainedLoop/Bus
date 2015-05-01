@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bus.MVC", "Bus.MVC\Bus.MVC.csproj", "{24F6A042-947A-4ED8-A655-B43E18D22FA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bus.API", "Bus.API\Bus.API.csproj", "{7BF2D9D7-8412-4AC4-877D-882FBF29B235}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24F6A042-947A-4ED8-A655-B43E18D22FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F6A042-947A-4ED8-A655-B43E18D22FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F6A042-947A-4ED8-A655-B43E18D22FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F6A042-947A-4ED8-A655-B43E18D22FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BF2D9D7-8412-4AC4-877D-882FBF29B235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BF2D9D7-8412-4AC4-877D-882FBF29B235}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BF2D9D7-8412-4AC4-877D-882FBF29B235}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BF2D9D7-8412-4AC4-877D-882FBF29B235}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

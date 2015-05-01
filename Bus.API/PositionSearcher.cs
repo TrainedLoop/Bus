@@ -13,8 +13,8 @@ namespace Bus.API
     {
         private static List<BusPosition> BusPositionList = new List<BusPosition>();
         private static List<BusPosition> BusPositionListTemp = new List<BusPosition>();
-        private static DateTime LastSearch = DateTime.MinValue;
-        private static int MaxRefreshTime = 5;
+        public static DateTime LastSearch = DateTime.MinValue;
+        public readonly static int MaxRefreshTime = 5;
         public readonly static int SecondIntevalToRefresh = 60;
         private static Task getInfoTask = new Task(GetInfo);
 
@@ -30,7 +30,7 @@ namespace Bus.API
             if (BusPositionList.Count == 0 || LastSearch.AddMinutes(MaxRefreshTime) < DateTime.Now)
                 getInfoTask.Wait();
 
-            return BusPositionList.Where(i => i.Line == line).ToList();
+            return BusPositionList.Where(i => i.Line == line && i.Date.AddMinutes(MaxRefreshTime) < DateTime.Now).ToList();
         }
 
 

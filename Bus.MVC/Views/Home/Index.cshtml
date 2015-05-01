@@ -106,7 +106,7 @@
 <div class="jumbotron">
     <div class="col-md-12">
         <img class="img-circle pull-right" style="margin-top:-60px;"  src="~/Content/AWT-Bus.png" />
-        <h1>RJ Cade meu ônibus?</h1>
+        <h1>Rio, Cade meu ônibus?</h1>
         
 
         
@@ -130,6 +130,7 @@
             <div class="map-canvas">
             </div>
         </div>
-        <p class="text-right">Atualização a cada: @Bus.API.PositionSearcher.SecondIntevalToRefresh segundos</p>
+        <p style="font-size:small;" class="text-right ">Ultima Atualização em:@Bus.API.PositionSearcher.LastSearch.ToString()
+        - Atualizações a cada: @Bus.API.PositionSearcher.SecondIntevalToRefresh segundos, tolerancia maxima no mapa de @Bus.API.PositionSearcher.MaxRefreshTime Minutos</p>
     </div>
 </div>

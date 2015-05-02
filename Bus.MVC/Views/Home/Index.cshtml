@@ -11,6 +11,9 @@
         margin: 0px;
         padding: 0px;
     }
+    p{
+        font-size:small
+    }
 </style>
 @section scripts {
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
@@ -33,6 +36,14 @@
                 navigator.geolocation.getCurrentPosition(function(position) {
                     initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
                     map.setCenter(initialLocation);
+
+                    var marker_0 = new google.maps.Marker({
+                        position:  new google.maps.LatLng(position.coords.latitude,position.coords.longitude ),
+                        map: map,
+                        animation: google.maps.Animation.DROP,
+                        icon: "/Content/user.png" 
+                    });
+
                 }, function() {
                     handleNoGeolocation(browserSupportFlag);
                 });
@@ -49,6 +60,7 @@
                     initialLocation = new google.maps.LatLng(@Model[0].Lat.ToString().Replace(',', '.'), @Model[0].Lng.ToString().Replace(',', '.'));
                 }
                 map.setCenter(initialLocation);
+
             }
             </text>}
             //Geolocation on Error without model
@@ -105,32 +117,34 @@
 
 <div class="jumbotron">
     <div class="col-md-12">
-        <img class="img-circle pull-right" style="margin-top:-60px;"  src="~/Content/AWT-Bus.png" />
-        <h1>Rio, Cade meu ônibus?</h1>
-        
-
-        
+        <img class="img-circle pull-right" style="margin-top:-60px;" src="~/Content/AWT-Bus.png" />
+        <h1>Rio, Cade meu ônibus?</h1>        
     </div>
-    
-    
-    
-    <div class="row well">
-        @using (Html.BeginForm("index"))
+    <div class="col-md-12">
+        <p>Localizador de ônibus da cidade do Rio de Janeiro</p>
+    </div>
+
+
+
+        <div class="row well">
+            @using (Html.BeginForm("index"))
         {
-            <div class="form-inline">
-                <label class="control-label">
-                    Buscar Linha:
-                </label>
-                <input type="text" name="line"  class="form-control" placeholder="Ex: 918">
-                <input type="submit"  class="btn btn-success" value="Buscar" />
-            </div>
+                <div class="form-inline">
+                    <label class="control-label">
+                        Buscar Linha:
+                    </label>
+                    <input type="text" name="line" class="form-control" placeholder="Ex: 918">
+                    <input type="submit" class="btn btn-success" value="Buscar" />
+                </div>
         }
 
-        <div id="map-canvas">
-            <div class="map-canvas">
+            <div id="map-canvas">
+                <div class="map-canvas">
+                </div>
             </div>
+            <p class="text-right ">
+                Ultima Atualização em:@Bus.API.PositionSearcher.LastSearch.ToString()
+                - Atualizações a cada: @Bus.API.PositionSearcher.SecondIntevalToRefresh segundos, tolerancia maxima no mapa de @Bus.API.PositionSearcher.MaxRefreshTime Minutos
+            </p>
         </div>
-        <p style="font-size:small;" class="text-right ">Ultima Atualização em:@Bus.API.PositionSearcher.LastSearch.ToString()
-        - Atualizações a cada: @Bus.API.PositionSearcher.SecondIntevalToRefresh segundos, tolerancia maxima no mapa de @Bus.API.PositionSearcher.MaxRefreshTime Minutos</p>
     </div>
-</div>

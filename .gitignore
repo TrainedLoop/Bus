@@ -242,3 +242,7 @@ pip-log.txt
     © 2015 GitHub, Inc. Terms Privacy Security Contact 
 
 Bus.sln.ide/storage.ide
+Bus.sln.ide/storage.ide
+*.chk
+*.chk
+Bus.sln.ide/storage.ide

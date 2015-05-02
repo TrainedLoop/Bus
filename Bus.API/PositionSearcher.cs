@@ -12,7 +12,6 @@ namespace Bus.API
     public static class PositionSearcher
     {
         private static List<BusPosition> BusPositionList = new List<BusPosition>();
-        private static List<BusPosition> BusPositionListTemp = new List<BusPosition>();
         public static DateTime LastSearch = DateTime.MinValue;
         public readonly static int MaxRefreshTime = 5;
         public readonly static int SecondIntevalToRefresh = 60;
@@ -30,7 +29,7 @@ namespace Bus.API
             if (BusPositionList.Count == 0 || LastSearch.AddMinutes(MaxRefreshTime) < DateTime.Now)
                 getInfoTask.Wait();
 
-            return BusPositionList.Where(i => i.Line == line && i.Date.AddMinutes(MaxRefreshTime) < DateTime.Now).ToList();
+            return BusPositionList.Where(i => i.Line == line && i.Date.AddMinutes(MaxRefreshTime) > DateTime.Now).ToList();
         }
 
 
@@ -40,8 +39,11 @@ namespace Bus.API
             var jsonText = new WebClient().DownloadString("http://dadosabertos.rio.rj.gov.br/apiTransporte/apresentacao/rest/index.cfm/obterTodasPosicoes.json");
             var jsonDesc = Json.JsonParser.FromJson(jsonText);
             dynamic JsonDescList = jsonDesc.Where(i => i.Key == "DATA").FirstOrDefault().Value;
+            
+            var BusPositionListTemp = new List<BusPosition>();
             foreach (var item in JsonDescList)
             {
+
                 BusPositionListTemp.Add(
                     new BusPosition
                     {
@@ -53,7 +55,12 @@ namespace Bus.API
                         Speed = Convert.ToDouble(item[5], new CultureInfo("en-US"))
                     });
             }
-            BusPositionList = BusPositionListTemp;
+            var BusPositionListTempDistinct = new List<BusPosition>();
+            foreach (var item in BusPositionListTemp.GroupBy(i=> i.Id))
+            {
+                BusPositionListTempDistinct.Add(item.Where(i=> i.Date == item.Max(m => m.Date)).FirstOrDefault());
+            }
+            BusPositionList = BusPositionListTempDistinct;
             LastSearch = DateTime.Now;
 
         }
